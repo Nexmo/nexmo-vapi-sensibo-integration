@@ -26,6 +26,9 @@
 # Ignore Nexmo Private Key
 private.key
 
+# Ignore passphrase audio
+passphrase.wav
+
 /public/packs
 /public/packs-test
 /node_modules
