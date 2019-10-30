@@ -1,6 +1,6 @@
 # Nexmo Voice API and Sensibo AC Controller Integration
 
-A Rails application that provides your air conditioner unit with a voice. Call your air conditioner and get relevant information on its current state, and change its settings without needing access to any external mobile or web applications.
+A Rails application that provides your air conditioner unit with a phone number. Call your air conditioner and get relevant information on its current state, and change its settings without needing access to any external mobile or web applications.
 
 * [Dependencies](#requirements)
 * [Installation and Usage](#installation-and-usage)
@@ -11,7 +11,6 @@ A Rails application that provides your air conditioner unit with a voice. Call y
 
 * [Nexmo VAPI](https://developer.nexmo.com/voice/voice-api/overview)
 * [Sensibo API](https://sensibo.github.io/)
-* [IBM Watson](https://cloud.ibm.com/apidocs/speech-to-text/speech-to-text)
 
 ## Installation and Usage
 
@@ -19,7 +18,6 @@ In order to properly use this application you need to create accounts with:
 
 * [Nexmo](https://dashboard.nexmo.com)
 * [Sensibo](https://home.sensibo.com)
-* [IBM Watson](https://cloud.ibm.com)
 
 You will need the relevant API credentials from each of those services for full functionality. Once you have your API credentials, you can enter them in `.env.sample` and rename the file to `.env`. 
 
