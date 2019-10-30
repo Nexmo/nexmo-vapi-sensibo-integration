@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root to: 'unit#index'
+  post '/webhooks/event', to: 'unit#event'
+  post '/webhooks/answer', to: 'unit#answer'
+  post '/authenticate', to: 'unit#authenticate'
+  post '/menu-choice', to: 'unit#menu'
 end

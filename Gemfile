@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'dotenv-rails'
 # Nexmo Rails integration
 gem 'nexmo_rails'
+# IBM Watson
+gem 'ibm_watson'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
