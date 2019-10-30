@@ -23,6 +23,9 @@
 # Ignore .env
 .env
 
+# Ignore Nexmo Private Key
+private.key
+
 /public/packs
 /public/packs-test
 /node_modules
