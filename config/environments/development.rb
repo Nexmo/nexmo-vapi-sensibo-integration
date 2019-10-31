@@ -7,7 +7,7 @@ Rails.application.configure do
   config.cache_classes = false
 
   # Whitelist ngrok host
-  config.hosts << "bengreenberg.ngrok.io"
+  # config.hosts <<  "ADD YOUR NGROK OR OTHER EXTERNAL URL HERE"
   
   # Do not eager load code on boot.
   config.eager_load = false
