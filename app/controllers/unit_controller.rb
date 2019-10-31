@@ -2,6 +2,7 @@ require 'json'
 require 'pry'
 class UnitController < ActionController::Base
   skip_before_action :verify_authenticity_token
+  AcUnit = Sensibo.new(ENV['SENSIBO_API_KEY'], ENV['SENSIBO_ID'])
 
   def answer
     render json:
@@ -30,7 +31,7 @@ class UnitController < ActionController::Base
       [
         {
           :action => 'talk',
-          :text => menu_options_text,
+          :text => AcUnit.menu_options_text,
           :bargeIn => true
         },
         {
@@ -52,18 +53,52 @@ class UnitController < ActionController::Base
   def menu
     case params['dtmf']
     when '1'
-      response = get_sensibo_status("#{ENV['SENSIBO_ID']}")
+      response = AcUnit.get_status
       render json:
       [
         {
           :action => 'talk',
-          :text => ac_info_text(response)
+          :text => AcUnit.ac_info_text(response)
         }
       ]
     when '2'
-      #action = update_sensibo_status('on')
+      response = AcUnit.update_status(true)
+      if response['status'] == 'success'
+        render json:
+        [
+          {
+            :action => 'talk',
+            :text => 'I am now on. Have a cool day!'
+          }
+        ]
+      else
+        render json:
+        [
+          {
+            :action => 'talk',
+            :text => 'Oops. Something went wrong. Please call back and try again.'
+          }
+        ]
+      end
     when '3'
-      #action = update_sensibo_status('off')
+      response = AcUnit.update_status(false)
+      if response['status'] == 'success'
+        render json:
+        [
+          {
+            :action => 'talk',
+            :text => 'I am now off. Have a warm day!'
+          }
+        ]
+      else
+        render json:
+        [
+          {
+            :action => 'talk',
+            :text => 'Oops. Something went wrong. Please call back and try again.'
+          }
+        ]
+      end
     else
       render json: 
       [
@@ -81,49 +116,11 @@ class UnitController < ActionController::Base
 
   private
 
-  def get_sensibo_status(id)
-    require 'net/https'
-    begin
-        uri = URI("#{ENV['SENSIBO_API_URL']}/#{ENV['SENSIBO_ID']}?fields=*&apiKey=#{ENV['SENSIBO_API_KEY']}")
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        req = Net::HTTP::Get.new(uri, {'Content-Type' => 'application/json'})
-        res = http.request(req)
-        data = JSON.parse(res.body)
-    rescue => e
-        puts "failed #{e}"
-    end
-    data
-  end
-
-  def ac_info_text(data)
-    <<~HEREDOC
-    You requested the current info on your AC unit located at:
-    #{data['result']['location']['address'][0]} in #{data['result']['location']['address'][1]}, #{data['result']['location']['address'][2]}.
-    
-    The AC unit is currently #{data['result']['acState']['on'] == 'true' ? 'on' : 'off'} and is 
-    #{data['result']['connectionStatus']['isAlive'] == 'true' ? 'connected' : 'disconnected'}.
-
-    It's target temperature is set to #{data['result']['acState']['targetTemperature']}.
-    HEREDOC
-  end
-
   def welcome_text
     <<~HEREDOC
     Hi! This is your air conditioner. 
     Please authenticate before continuing by entering your passkey. 
     When you are done please enter the hash key.
-    HEREDOC
-  end
-
-  def menu_options_text
-    <<~HEREDOC
-    Thank you for authenticating. 
-    Please choose from the following options: 
-    Press 1 and the hash key for my current status
-    Press 2 and the hash key to turn me on
-    Press 3 and the hash key to turn me off
-    Or hang up at anytime to end this call
     HEREDOC
   end
 end
