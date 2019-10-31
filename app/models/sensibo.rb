@@ -1,6 +1,6 @@
 require 'net/https'
 require 'json'
-require 'pry'
+
 class Sensibo
   attr_reader :api_key, :id
 
@@ -32,7 +32,6 @@ class Sensibo
       req.body = {"newValue" => state}.to_json
       res = http.request(req)
       data = JSON.parse(res.body)
-      binding.pry
     rescue => e
       puts "failed #{e}"
     end

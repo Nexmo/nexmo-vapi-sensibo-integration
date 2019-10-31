@@ -1,5 +1,5 @@
 require 'json'
-require 'pry'
+
 class UnitController < ActionController::Base
   skip_before_action :verify_authenticity_token
   AcUnit = Sensibo.new(ENV['SENSIBO_API_KEY'], ENV['SENSIBO_ID'])
