@@ -1,1 +1,47 @@
-<h1>Hello there</h1>
+<h1 id="nexmovoiceapiandsensiboaccontrollerintegration">Nexmo Voice API and Sensibo AC Controller Integration</h1>
+
+<p>A Rails application that provides your air conditioner unit with a phone number. Call your air conditioner and get relevant information on its current state, and change its settings without needing access to any external mobile or web applications.</p>
+
+<ul>
+<li><a href="#requirements">Dependencies</a></li>
+
+<li><a href="#installation-and-usage">Installation and Usage</a></li>
+
+<li><a href="#contributing">Contributing</a></li>
+
+<li><a href="#license">License</a></li>
+</ul>
+
+<h2 id="dependencies">Dependencies</h2>
+
+<ul>
+<li><a href="https://developer.nexmo.com/voice/voice-api/overview">Nexmo VAPI</a></li>
+
+<li><a href="https://sensibo.github.io/">Sensibo API</a></li>
+</ul>
+
+<h2 id="installationandusage">Installation and Usage</h2>
+
+<p>In order to properly use this application you need to create accounts with:</p>
+
+<ul>
+<li><a href="https://dashboard.nexmo.com">Nexmo</a></li>
+
+<li><a href="https://home.sensibo.com">Sensibo</a></li>
+</ul>
+
+<p>You will need the relevant API credentials from each of those services for full functionality. Once you have your API credentials, you can enter them in <code>.env.sample</code> and rename the file to <code>.env</code>. </p>
+
+<p>This application connects your Sensibo powered air conditioner to a Nexmo phone number. As such, you must sign up for a <a href="https://dashboard.nexmo.com">Nexmo account</a> and provision a Nexmo phone number from the dashboard. Once you have provisioned a number, you then need to create a Voice application from the dashboard and link your new application to your new number from within the applicatipn's dashboard settings. Add your <code>NEXMO_APPLICATION_ID</code> and <code>NEXMO_NUMBER</code> to your <code>.env</code> file.</p>
+
+<p>To start the application execute <code>rails s</code> from the command line. This will initiate your Rails application. </p>
+
+<p>Your application needs to be externally accessible for the APIs to successfully connect with it. For local development work <a href="https://ngrok.io">ngrok</a> is a great option. Make sure to provide your ngrok URL to the external API providers in their dashboards so they know where to find your application. Within the Nexmo dashboard you can provide both your <code>event</code> and <code>answer</code> webhook external URLs inside the settings for your Nexmo Voice application.</p>
+
+<h2 id="contributing">Contributing</h2>
+
+<p>We ❤️ contributions from everyone! <a href="https://github.com/Nexmo/nexmo-vapi-sensibo-integration/issues">Bug reports</a>, <a href="https://github.com/Nexmo/nexmo-vapi-sensibo-integration/pulls">bug fixes</a> and feedback on the library is always appreciated. Look at the <a href="https://github.com/Nexmo/nexmo-vapi-sensibo-integration/blob/master/CONTRIBUTING.md">Contributor Guidelines</a> for more information and please follow the <a href="https://guides.github.com/introduction/flow/index.html">GitHub Flow</a>.</p>
+
+<h2 id="license">License</h2>
+
+<p>This project is under the <a href="https://github.com/Nexmo/nexmo-vapi-sensibo-integration/blob/master/LICENSE">MIT LICENSE</a>.</p>
