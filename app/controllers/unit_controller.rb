@@ -19,6 +19,7 @@ class UnitController < ActionController::Base
         :maxDigits => 6,
       }
     ].to_json
+    @@leg_uuid = params[:uuid]
   end
 
   def event
@@ -31,14 +32,19 @@ class UnitController < ActionController::Base
       [
         {
           :action => 'talk',
-          :text => AcUnit.menu_options_text,
-          :bargeIn => true
+          :text => AcUnit.menu_options_text
         },
         {
           :action => 'input',
+          :dtmf => {
+            :maxDigits => 1
+          },
           :eventUrl => ["#{ENV['BASE_URL']}/menu-choice"],
-          :submitOnHash => true,
-          :maxDigits => 1,
+          :speech => {
+            :context => ["one", "two", "three"],
+            :language => "en-gb",
+            :uuid => [@@leg_uuid]
+          }
         }
       ]
     else
