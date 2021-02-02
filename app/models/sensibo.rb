@@ -54,9 +54,9 @@ class Sensibo
     <<~HEREDOC
     Thank you for authenticating. 
     Please choose from the following options: 
-    Press 1 and the hash key for my current status
-    Press 2 and the hash key to turn me on
-    Press 3 and the hash key to turn me off
+    Say 1 for my current status
+    Say 2 to turn me on
+    Say 3 to turn me off
     Or hang up at anytime to end this call
     HEREDOC
   end
